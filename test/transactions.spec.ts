@@ -38,19 +38,19 @@ describe('Transactions routes', () => {
         amount: 5000,
         type: 'credit',
       })
-    
+
     const cookies = createTransactionResponse.get('Set-Cookie')
-    
+
     const listTransactionResponse = await request(app.server)
       .get('/transactions')
       .set('Cookie', cookies)
-      expect(200)
-    
+    expect(200)
+
     expect(listTransactionResponse.body.transactions).toEqual([
       expect.objectContaining({
         title: 'New transaction',
-        amount: 5000
-      })
+        amount: 5000,
+      }),
     ])
   })
 
@@ -62,26 +62,26 @@ describe('Transactions routes', () => {
         amount: 5000,
         type: 'credit',
       })
-    
+
     const cookies = createTransactionResponse.get('Set-Cookie')
-    
+
     const listTransactionResponse = await request(app.server)
       .get('/transactions')
       .set('Cookie', cookies)
-      expect(200)
+    expect(200)
 
     const transactionId = listTransactionResponse.body.transactions[0].id
-    
+
     const getTransactionResponse = await request(app.server)
-    .get(`/transactions/${transactionId}`)
-    .set('Cookie', cookies)
-    .expect(200)
+      .get(`/transactions/${transactionId}`)
+      .set('Cookie', cookies)
+      .expect(200)
 
     expect(getTransactionResponse.body.transaction).toEqual(
       expect.objectContaining({
         title: 'New transaction',
-        amount: 5000
-      })
+        amount: 5000,
+      }),
     )
   })
 
@@ -93,7 +93,7 @@ describe('Transactions routes', () => {
         amount: 5000,
         type: 'credit',
       })
-    
+
     const cookies = createTransactionResponse.get('Set-Cookie')
 
     await request(app.server)
@@ -104,16 +104,14 @@ describe('Transactions routes', () => {
         amount: 2000,
         type: 'debit',
       })
-    
+
     const sumaryResponse = await request(app.server)
       .get('/transactions/sumary')
       .set('Cookie', cookies)
-      expect(200)
-    
+    expect(200)
+
     expect(sumaryResponse.body.sumary).toEqual({
       amount: 3000,
     })
   })
 })
-
-
