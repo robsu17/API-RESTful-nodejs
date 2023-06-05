@@ -5,7 +5,23 @@ import { randomUUID } from 'node:crypto'
 import { checkSessionIdExist } from '../middlewares/check-session-id-exist'
 
 // Cookies -> Fromas do navegador manter contexto entre as requisições
-// 
+
+/**
+ * Testes Automatizados:
+ * 
+ * Unitários: unidade da sua aplicação
+ * 
+ * Integração: comunicação entre duas ou mais unidades
+ * 
+ * e2e - ponta a ponta: simulam um usuário operando na nossa aplicação
+ * 
+ * front-end: abre a págiona de login, digite o texto diego@rocketseat.com.br no campo
+ * com ID email, clique no botão...
+ * 
+ * back-end: chamadas HTTP, websockets
+ * 
+ * Pirâmide de testes: E2E (não dependem de nenhuma tecnologia, não dependem de arquitetura)
+ */
 
 export async function transactionsRoutes(app: FastifyInstance) {
   app.addHook('preHandler', async (request, reply) => {
